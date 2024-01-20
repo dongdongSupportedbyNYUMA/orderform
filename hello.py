@@ -18,8 +18,8 @@ client_id = "2002946997"
 # Channel Secret
 client_secret = "5b1dd1ebf7658140c8847c153a5ec619"
 # Callback URL
-redirect_uri = 'https%3A%2F%2Fnyuma-rensen.onrender.com%2Fcallback'
-redirect_uri_de = 'https://nyuma-rensen.onrender.com/callback'
+redirect_uri = 'https%3A%2F%2Forderform-qoyy.onrender.com%2Fcallback'
+redirect_uri_de = 'https://orderform-qoyy.onrender.com/callback'
 # LINE エンドポイント
 authorization_url = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id='
 token_url = 'https://api.line.me/oauth2/v2.1/token'
