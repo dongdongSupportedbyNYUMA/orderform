@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <style>
+        /* テキストの文字サイズを変更 */
+        .large-text {
+            font-size: 40px;
+            margin: auto;
+        }
+
+        .small-text {
+            font-size: 12px;
+            margin: auto;
+        }
+        .center{
+            width: 100%;
+            max-width: 960px;
+            margin: auto;
+        }
+        .icon{
+            margin: auto;
+        }
+
+        
+    </style>
+    <header class="center">
+        <div class="arge-text" style="text-align:center" >咚咚♏️♏️的代購OrderForm</s></div>
+            
+            <!-- <img src="" class="rounded-circle" width=30% > -->
+            <!-- <img src="https://drive.google.com/uc?export=view&id=id=1uDBlXBEeQ2YRGBn1UxKeKCCJvJH5s3eQ" class="rounded-circle" width=30% > -->
+        </div>
+    </header>
+    <body>
+        <div class="center">
+        <main>  
+         <span class="user_id" style="display:none;" id="user_id" value="{{ user_id }}">
+        </span>
+         <span class="user_name" style="margin:auto 24px;" id="user_name" value="{{ user_name }}">
+          </span>
+          <div style="text-align:right">
+            <img src="{{ picture_url }}" class="rounded-circle" height="15%" style="text-align:center" id="icon">
+
+          </div>
+
+
+            <!-- ここに告知等 -->
+            <div style="text-align:center">
+            <textarea rows="20" cols="50" readonly>
+    
+
+            </textarea>
+            <!-- ここまで告知等 -->
+        </div>
+
+        <div style="text-align:center">
+            <a href="/mercari?user_id={{ user_id }}+&user_name={{ user_name }}"  class="large-text">日拍下單區
+                <!-- <img src=""alt="mercari"
+                width=30% height=30%> -->
+            </a>
+        </div>
+
+        <br>
+        <div style="text-align:center">          
+            <a href="/net?user_id={{ user_id }}+&user_name={{ user_name }}" class="large-text">官方網站下單區
+                <!-- <img src=" "alt="NET"
+                width=30% height=30%> -->
+            </a>
+        </div>       
+
+        </main>      
+    </div>   
+    </body>
+</html>

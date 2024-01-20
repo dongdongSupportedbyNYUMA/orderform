@@ -1,0 +1,7 @@
+flask
+pandas
+numpy
+oauth2client
+gspread
+urllib3
+gunicorn

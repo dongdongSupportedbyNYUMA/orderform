@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    /* ボタンにスタイルを適用 */
+    .large-button {
+        font-size: 30px;
+        width: 200px;
+    }
+    .agreement{
+      font-size: 30px;
+    }
+    input.agreement_check {
+	transform: scale(1.5);
+}
+    .center{
+            width: 100%;
+            max-width: 960px;
+            margin: auto;
+        }
+    input {
+      font-size: 170%;
+    }
+    button {
+      font-size: 150%;
+      width: 300px;
+    }    
+
+
+</style>
+    <title>フォーム送信</title>
+</head>
+<header class="center">
+
+  <div class="icon" style="text-align:right" >
+  <span class="user_name" style="margin:auto 10px;"  value="{{ user_name }}様">{{ user_name }}様</span>
+</div>
+</header>
+<body class="center">
+    <form action="/order" method="post" id="myForm" style="text-align:center">
+
+            <input type="text" style="display:none;" name="user_id" id="user_id" value="{{ user_id }}" type="hidden">
+            <input type="text" style="display:none;" name="user_name" id="user_name" value="{{ user_name }}" type="hidden">
+            <input class="user_name" style="margin:auto 10px;"  value="{{ user_name }}様" type="hidden">
+            <input type="text" style="display:none;" name="inputCount" id="inputCount" value="1" type="hidden">
+ 
+        
+
+        <div id="inputContainer">
+            <div>
+                <label>URL: </label><input type="text" id=url name="myURL1"  required minlength="8" maxlength="500" size="15" >
+                <br>
+                <label>価格: </label><input type="text" id=val name="val1"  required minlength="1" maxlength="10" size="7">
+                <br>
+                <label>個数: </label><input type="text" id="pic" name="pic1"  required  minlength="1" maxlength="10" size="7">
+                <br>
+                <label>商品名、角色/款式: </label><input type="text" id="type" name="type1"  minlength="1" maxlength="200" size="15">
+        </div>
+
+        </div>
+
+        <div style="text-align:center">
+          <button type="button" id="addInput" class=large-button width=150px >追加</button>
+        </div>
+        <label>備註:有特殊需求請填寫(例:泡泡紙捆包),若不確定如何填寫請聯絡客服<br></label>
+          <textarea name="option" id="option" value="" row="20" cols="50"></textarea>
+
+
+        <!-- <div class="must-scroll" style="text-align:center">
+            <textarea rows="20" cols="50"  readonly>
+                            
+            </textarea>
+            <div label for="agreement" class="agreement"><input type="checkbox" class="agreement_check" id="agreement" onchange="checkAgreement()" disabled >同意</label></div>
+        </div> -->
+      <div>
+        <input type="submit" id="submit" value="送信" class=large-button>
+      </div>
+    </form>
+
+    <script>
+        var inputCount = 1; 
+        
+        document.getElementById("addInput").addEventListener("click", function() {
+            var inputContainer = document.getElementById("inputContainer");
+            var br = document.createElement("br");
+            var br2 = document.createElement("br");
+            var br3 = document.createElement("br");
+            // urlのinputボックスを追加
+            var newDiv = document.createElement("div");
+            var urlLabel = document.createElement("label");
+            urlLabel.textContent = "URL: ";
+            var urlInput = document.createElement("input");
+            urlInput.type = "text";
+            urlInput.name = "myURL" + (++inputCount);
+            urlInput.value = "";
+            urlInput.size="15";
+            urlInput.minlength="8";
+            urlInput.maxlength="500";
+            urlInput.required = true; 
+            newDiv.appendChild(urlLabel);
+            newDiv.appendChild(urlInput);
+            newDiv.appendChild(br);
+            // 価格のinputボックスを追加
+            var valLabel = document.createElement("label");
+            valLabel.textContent = "価格: ";
+            var valInput = document.createElement("input");
+            valInput.type = "text";
+            valInput.name = "val" + (inputCount);
+            valInput.value = "";
+            valInput.size="7";
+            valInput.minlength="1";
+            valInput.maxlength="10";
+            valInput.required = true; 
+            newDiv.appendChild(valLabel);
+            newDiv.appendChild(valInput);
+            newDiv.appendChild(br2);
+            // 個数のinputボックスを追加
+            var picLabel = document.createElement("label");
+            picLabel.textContent = "個数: ";
+            var picInput = document.createElement("input");
+            picInput.type = "text";
+            picInput.name = "pic" + (inputCount);
+            picInput.value = "";
+            picInput.size="7";
+            picInput.minlength="1";
+            picInput.maxlength="10";
+            picInput.required = true; 
+            newDiv.appendChild(picLabel);
+            newDiv.appendChild(picInput);
+            newDiv.appendChild(br3);
+            // タイプのinputボックスを追加
+            var typeLabel = document.createElement("label");
+            typeLabel.textContent = "商品名、角色/款式:";
+            var typeInput = document.createElement("input");
+            typeInput.type = "text";
+            typeInput.name = "type" + (inputCount);
+            typeInput.value = "";
+            typeInput.size="15";
+            typeInput.minlength="1";
+            typeInput.maxlength="200";
+            newDiv.appendChild(typeLabel);
+            newDiv.appendChild(typeInput);        
+
+            inputContainer.appendChild(newDiv);
+            document.getElementById('inputCount').innerText = inputCount
+            document.getElementById('inputCount').value = inputCount
+            
+        });
+
+        const mustScrollElements = document.querySelectorAll(".must-scroll");
+          for(i=0;i<mustScrollElements.length;i++){
+            const textarea = mustScrollElements[i].querySelector("textarea");
+            const checkbox = mustScrollElements[i].querySelector("input[type='checkbox']");
+            const button = mustScrollElements[i].querySelector("input[type='button']");
+            const label = mustScrollElements[i].querySelector("label");
+          
+            let buttonFor
+            if(button&&button.hasAttribute("for")){
+              buttonFor = button.attributes["for"].value;
+            }
+          
+            let scrolled = false;
+            if(textarea){
+              textarea.addEventListener("scroll", func=()=>{
+                if(!scrolled && Math.abs(textarea.scrollHeight-textarea.clientHeight-textarea.scrollTop)<1){
+                  scrolled = true;
+                  if(checkbox){checkbox.disabled=false;}
+                  if(label){label.classList.remove("disabled");}
+                  if(!buttonFor){
+                    if(button){button.disabled=false;}
+                  }
+                }
+              });
+            }
+            if(buttonFor){
+              const mustCheck = document.querySelector("input#" + buttonFor);
+              mustCheck.addEventListener("click", func=()=>{
+                button.disabled = !mustCheck.checked;
+              });
+            }
+        }
+
+        function checkAgreement() {
+            var agreementCheckbox = document.getElementById('agreement');
+            var submit = document.getElementById('submit');
+            
+            if (agreementCheckbox.checked) {
+                submit.disabled = false;
+            } else {
+                submit.disabled = true;
+            }
+        }
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+  <style>
+    /* ボタンにスタイルを適用 */
+    .large-button {
+        font-size: 30px;
+        width: 200px;
+    }
+    .agreement{
+      font-size: 30px;
+    }
+    input.agreement_check {
+	transform: scale(1.5);
+}
+    .center{
+            width: 100%;
+            max-width: 960px;
+            margin: auto;
+        }
+    input {
+      font-size: 170%;
+    }
+    button {
+      font-size: 150%;
+      width: 300px;
+    }         
+</style>
+    <title>フォーム送信</title>
+    
+</head>
+
+<header class="center">
+
+  <div class="icon" style="text-align:right" >
+    <span class="user_name" style="margin:auto 10px;"  value="{{ user_name }}様">{{ user_name }}様</span>
+  </div>
+</header>
+<body>
+  <div class="center">
+    <form action="/order_mercari" method="post" id="myForm" style="text-align:center" >
+
+            <input type="text" style="display:none;" name="user_id" id="user_id" value="{{ user_id }}" type="hidden">
+            <input type="text" style="display:none;" name="user_name" id="user_name" value="{{ user_name }}" type="hidden">
+            <input class="user_name" style="margin:auto 10px;"  value="{{ user_name }}様" type="hidden">
+ 
+        
+
+        <div id="inputContainer" style="text-align:center" >
+            <div style="text-align:center" >
+                <label>URL: </label><input type="text" id=url name="url"  required minlength="8" maxlength="500" size="15">
+                <br>
+                <label>価格: </label><input type="text" id=val name="val"  required minlength="1" maxlength="10" size="7">
+        </div>
+          <label>備註:有特殊需求請填寫(例:泡泡紙捆包)<br>若不確定如何填寫請聯絡客服<br>
+          <textarea name="option" id="option" value="" row="20" cols="50"></textarea>
+        </div>
+
+        <!-- <div class="must-scroll" style="text-align:center" >
+          ここから注意文
+            <textarea rows="20" cols="50" readonly>
+                            
+            </textarea>
+            <div label for="agreement" class="agreement"><input type="checkbox" class="agreement_check" id="agreement" onchange="checkAgreement()" disabled >同意</label></div>
+        </div> -->
+
+        <input type="submit" id="submit" value="送信" class=large-button style="text-align:center" >
+    </form>
+
+    <script>
+        const mustScrollElements = document.querySelectorAll(".must-scroll");
+          for(i=0;i<mustScrollElements.length;i++){
+            const textarea = mustScrollElements[i].querySelector("textarea");
+            const checkbox = mustScrollElements[i].querySelector("input[type='checkbox']");
+            const button = mustScrollElements[i].querySelector("input[type='button']");
+            const label = mustScrollElements[i].querySelector("label");
+          
+            let buttonFor
+            if(button&&button.hasAttribute("for")){
+              buttonFor = button.attributes["for"].value;
+            }
+          
+            let scrolled = false;
+            if(textarea){
+              textarea.addEventListener("scroll", func=()=>{
+                if(!scrolled && Math.abs(textarea.scrollHeight-textarea.clientHeight-textarea.scrollTop)<1){
+                  scrolled = true;
+                  if(checkbox){checkbox.disabled=false;}
+                  if(label){label.classList.remove("disabled");}
+                  if(!buttonFor){
+                    if(button){button.disabled=false;}
+                  }
+                }
+              });
+            }
+            if(buttonFor){
+              const mustCheck = document.querySelector("input#" + buttonFor);
+              mustCheck.addEventListener("click", func=()=>{
+                button.disabled = !mustCheck.checked;
+              });
+            }
+        }
+
+        function checkAgreement() {
+            var agreementCheckbox = document.getElementById('agreement');
+            var submit = document.getElementById('submit');
+            
+            if (agreementCheckbox.checked) {
+                submit.disabled = false;
+            } else {
+                submit.disabled = true;
+            }
+        }
+        // });
+    </script>
+    </div>
+</body>
+</html>
