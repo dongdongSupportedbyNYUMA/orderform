@@ -84,6 +84,7 @@
         
         document.getElementById("addInput").addEventListener("click", function() {
             var inputContainer = document.getElementById("inputContainer");
+            const addInput=document.getElementById('addInput');
             var br = document.createElement("br");
             var br2 = document.createElement("br");
             var br3 = document.createElement("br");
@@ -146,6 +147,9 @@
             inputContainer.appendChild(newDiv);
             document.getElementById('inputCount').innerText = inputCount
             document.getElementById('inputCount').value = inputCount
+            if  (inputCount >= 20) {
+              addInput.disabled = true;
+            }
             
         });
 
